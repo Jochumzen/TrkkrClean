@@ -1,0 +1,2 @@
+rootProject.name = "TrkkrClean"
+include ':app'
