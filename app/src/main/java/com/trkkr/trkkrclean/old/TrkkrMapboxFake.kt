@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.old
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import com.mapbox.mapboxsdk.maps.MapView
 import java.lang.NullPointerException
 
+/*
 class TrkkrMapboxFake : ITrkkrMapbox {
 
     private var frameLayout : FrameLayout? = null
@@ -43,3 +44,5 @@ class TrkkrMapboxFake : ITrkkrMapbox {
     override fun setStyle(savedInstanceState: Bundle?) {
     }
 }
+
+ */

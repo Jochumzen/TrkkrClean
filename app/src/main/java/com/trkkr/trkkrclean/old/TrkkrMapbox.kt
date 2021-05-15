@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.old
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.maps.Style
 import java.lang.NullPointerException
 import javax.inject.Inject
 
+/*
 class TrkkrMapbox : ITrkkrMapbox
 {
 
@@ -49,3 +50,5 @@ class TrkkrMapbox : ITrkkrMapbox
         }
     }
 }
+
+ */

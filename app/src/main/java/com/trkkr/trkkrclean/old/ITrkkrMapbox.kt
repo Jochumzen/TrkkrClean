@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.old
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions
 import com.mapbox.mapboxsdk.maps.Style
 
+/*
 interface ITrkkrMapbox {
     fun getInstance(context: Context, accessToken: String)
 
@@ -19,3 +20,5 @@ interface ITrkkrMapbox {
 
     fun setStyle(savedInstanceState: Bundle?)
 }
+
+ */
