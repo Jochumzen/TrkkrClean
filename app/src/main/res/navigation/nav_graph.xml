@@ -9,5 +9,14 @@
         android:id="@+id/mapFragment"
         android:name="com.trkkr.trkkrclean.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.trkkr.trkkrclean.SearchFragment"
+        tools:layout="@layout/fragment_search"
+        android:label="SearchFragment" />
 </navigation>

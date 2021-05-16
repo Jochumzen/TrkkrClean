@@ -7,7 +7,9 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.camera.CameraUpdate
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
@@ -24,6 +26,16 @@ class TrkkrMapView @Inject constructor(
         weakMapView = WeakReference(mapView)
         Log.d("MyDebug", "mapview in setup: $mapView")
         mapView?.getMapAsync { mapboxMap ->
+
+            /*
+            val x = CameraUpdateFactory.newCameraPosition(CameraPosition.Builder()
+                .target(LatLng(51.50550, -0.07520))
+                .zoom(10.0)
+                .tilt(20.0)
+                .build())
+            mapboxMap.moveCamera(x)
+
+             */
             Log.d("MyDebug", "mbm in setup: $mapboxMap")
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
                 Log.d("MyDebug", "style in setup: $it")

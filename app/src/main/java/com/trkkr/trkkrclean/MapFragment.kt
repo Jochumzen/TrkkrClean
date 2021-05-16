@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.trkkr.trkkrclean.databinding.FragmentMapBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,14 +45,20 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                 Log.d("MyDebug", "mbm: $it")
                 mapboxMap = it
 
+
                 trkkrLocation.enableLocationComponent(
                     context = requireActivity(),
                     mapboxMap = mapboxMap,
                     flyToLocation = savedInstanceState == null,
                     mapViewModel = mapViewModel
                 )
+
             }
             setupViewObservers()
+
+            mapSearchFab.setOnClickListener { view ->
+                Navigation.findNavController(view).navigate(R.id.action_mapFragment_to_searchFragment)
+            }
         }
 
         Log.d("MyDebug", "vm: $mapViewModel")
