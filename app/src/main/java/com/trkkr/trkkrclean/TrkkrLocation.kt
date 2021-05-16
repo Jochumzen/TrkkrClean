@@ -18,27 +18,38 @@ import java.lang.Exception
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
+
+//Try to figure out how to inject the ViewModel into the constructor instead of sending it as an argument in enableLocationComponent
 class TrkkrLocation @Inject constructor(
     private val permissionsUtil: PermissionsUtil,
     private val locationEngine: LocationEngine
 ) : LocationEngineCallback<LocationEngineResult> {
 
+
     private var weakContext: WeakReference<Context?>? = null
+    private var flyToLocation = false
+    private var mapViewModel: MapViewModel? = null
+
 
     fun enableLocationComponent(
+        mapViewModel: MapViewModel,
         context: Context,
-        mapboxMap: MapboxMap?
+        mapboxMap: MapboxMap?,
+        flyToLocation: Boolean
     ) {
         Log.d("MyDebug", "enableLocationComponent. mbm: $mapboxMap")
 
         weakContext = WeakReference(context)
+
+        this@TrkkrLocation.mapViewModel = mapViewModel
 
         mapboxMap?.let {
             if (PermissionsManager.areLocationPermissionsGranted(context)) {
                 Log.d("MyDebug", "PermissionsGranted")
                 onLocationPermissionGranted(
                     mapboxMap = mapboxMap,
-                    context = this@TrkkrLocation.context
+                    context = this@TrkkrLocation.context,
+                    flyToLocation = flyToLocation
                 )
             } else {
                 Log.d("MyDebug", "PermissionsNotGranted")
@@ -68,7 +79,14 @@ class TrkkrLocation @Inject constructor(
     }
 
     override fun onSuccess(result: LocationEngineResult?) {
-        // TODO("Not yet implemented")
+        context?.let {
+            val lastLocation = result?.lastLocation ?: return
+
+            if (flyToLocation) {
+                flyToLocation = false
+                mapViewModel?.updateLocationFlyer(lastLocation)
+            }
+        }
     }
 
     override fun onFailure(exception: Exception) {
@@ -82,7 +100,8 @@ class TrkkrLocation @Inject constructor(
             if (granted) {
                 onLocationPermissionGranted(
                     mapboxMap = mapboxMap,
-                    context = this@TrkkrLocation.context
+                    context = this@TrkkrLocation.context,
+                    flyToLocation = flyToLocation
                 )
             } else {
                 //toaster.showToast(permissionError)
@@ -94,7 +113,8 @@ class TrkkrLocation @Inject constructor(
     @SuppressLint("MissingPermission")
     private fun onLocationPermissionGranted(
         mapboxMap: MapboxMap,
-        context: Context?
+        context: Context?,
+        flyToLocation: Boolean
     ) {
         mapboxMap.style?.let { style ->
 
@@ -116,7 +136,12 @@ class TrkkrLocation @Inject constructor(
             locationComponent.cameraMode = CameraMode.TRACKING
 
             locationComponent.renderMode = RenderMode.COMPASS
-            Log.d("MyDebug", "locationComponent done")
+
+            this.flyToLocation = flyToLocation
+
+            if (flyToLocation) {
+                requestLocationUpdate()
+            }
         }
 
     }
@@ -128,4 +153,5 @@ class TrkkrLocation @Inject constructor(
         private const val DEFAULT_INTERVAL_IN_MILLISECONDS = 3000L
         private const val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
     }
+
 }

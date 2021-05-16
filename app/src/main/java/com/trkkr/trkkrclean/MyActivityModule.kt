@@ -16,7 +16,7 @@ object MyActivityModule {
 
     @Provides
     fun provideTrkkrMapView() : TrkkrMapView {
-        return TrkkrMapView()
+        return TrkkrMapView(Mapper())
     }
 
     @Provides
