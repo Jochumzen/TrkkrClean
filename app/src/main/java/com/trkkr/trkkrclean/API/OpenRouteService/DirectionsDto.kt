@@ -13,7 +13,6 @@ data class DirectionsDto (
     var bbox: List<Double>? = null,
 
     @SerializedName("metadata")
-    
     var metadata: Metadata? = null
 ) {
 
