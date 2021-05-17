@@ -30,7 +30,7 @@ class TrkkrLocation @Inject constructor(
     private var flyToLocation = false
     private var mapViewModel: MapViewModel? = null
 
-
+    //private val mapViewModel: MapViewModel by activityViewModels()
     fun enableLocationComponent(
         mapViewModel: MapViewModel,
         context: Context,
