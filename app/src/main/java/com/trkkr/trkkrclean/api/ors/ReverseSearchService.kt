@@ -1,4 +1,5 @@
 package com.trkkr.trkkrclean.api.ors
+import com.trkkr.trkkrclean.api.ors.search.SearchDto
 import retrofit2.http.GET
 
 interface ReverseSearchService {
