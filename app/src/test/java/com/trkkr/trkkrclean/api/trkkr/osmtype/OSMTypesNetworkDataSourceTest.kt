@@ -16,7 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.nio.charset.StandardCharsets
 
 
-@ExperimentalCoroutinesApi
 class OSMTypesNetworkDataSourceTest {
 
     private val mockWebServer = MockWebServer()
@@ -25,7 +24,7 @@ class OSMTypesNetworkDataSourceTest {
         .baseUrl(mockWebServer.url("/"))
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-        .create(OSMTypeService::class.java)
+        .create(OSMTypesService::class.java)
 
     private val sut = OSMTypesNetworkDataSource(api)
 
@@ -40,8 +39,9 @@ class OSMTypesNetworkDataSourceTest {
 
         runBlocking {
             val actual = sut.fetchOsmTypes()
+
             val osmPoiType = OSMTypesDto.OsmPoiType(osmTypeId = 477, osmKey = "amenity", osmValue = "bar", nameEn = "bar", nameSv= "bar", canBeNode = true,
-            canBeWay= false, canBeArea = true, canBeCreated= true, isCommon= false,
+                canBeWay= false, canBeArea = true, canBeCreated= true, isCommon= false,
                 descriptionEn = "Bar is a purpose-built commercial establishment that sells alcoholic drinks to be consumed on the premises. They are characterised by a noisy and vibrant atmosphere, similar to a party and usually don't sell food. See also the description of the tags amenity=pub;bar;restaurant for a distinction between these.",
             descriptionSv= "En bar är en kommersiell verksamhet som säljer alkoholhaltiga drycker som konsumeras på plats. De kännetecknas av en bullrig och pulserande atmosfär, liknar en fest och brukar inte sälja mat. Se även beskrivningen av taggar rekreations = pub, bar, restaurang för en skillnad mellan dessa.",
             imageName = "Bar MXCT.JPG")

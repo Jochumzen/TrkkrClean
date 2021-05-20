@@ -1,6 +1,6 @@
 package com.trkkr.trkkrclean.di
 
-import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypeService
+import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesService
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesDataSource
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesNetworkDataSource
 import dagger.Module
@@ -21,6 +21,6 @@ object NetworkModule {
                 .baseUrl("http://jochumzen-001-site1.htempurl.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(OSMTypeService::class.java)
+                .create(OSMTypesService::class.java)
         )
 }
