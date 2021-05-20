@@ -38,10 +38,13 @@ class OverpassNodeNetworkDataSourceTest {
             val actual = sut.fetchNode("data=[out:json];(node(2713060210););out;")
 
 
-            val expected = OverpassNodeDto(version = 0.6, generator = "Overpass API 0.7.56.9 76e5016d",
-                osm3s = OverpassNodeDto.Osm3s(timestampOsmBase = "2021-05-17T17:49:56Z",
-                copyright = "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."),
-                elements = listOf(
+            val expected = OverpassNodeDto(
+                version = 0.6,
+                generator = "Overpass API 0.7.56.9 76e5016d",
+                osm3s = OverpassNodeDto.Osm3s(
+                    timestampOsmBase = "2021-05-17T17:49:56Z",
+                    copyright = "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."),
+                    elements = listOf(
                     OverpassNodeDto.Element(
                         type = "node",
                         id = 2713060210,
