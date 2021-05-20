@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.API.Trkkr
+package com.trkkr.trkkrclean.api.trkkr
 import retrofit2.http.GET
 
 interface ImageService {

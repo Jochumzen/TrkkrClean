@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.API.Wikidata
+package com.trkkr.trkkrclean.api.wikidata
 import retrofit2.http.GET
 
 interface WikidataService {

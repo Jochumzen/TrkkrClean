@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.API.Wikipedia
+package com.trkkr.trkkrclean.api.wikipedia
 import retrofit2.http.GET
 
 interface WikipediaService {

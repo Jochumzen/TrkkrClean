@@ -1,9 +1,8 @@
-package com.trkkr.trkkrclean.API.Trkkr
+package com.trkkr.trkkrclean.api.trkkr.osmtype
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class OSMTypeDto (
+data class OSMTypesDto (
 
     @SerializedName("result") 
     var result: String? = null,

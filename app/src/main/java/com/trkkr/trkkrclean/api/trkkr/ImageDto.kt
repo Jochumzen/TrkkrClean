@@ -1,6 +1,5 @@
-package com.trkkr.trkkrclean.API.Trkkr
+package com.trkkr.trkkrclean.api.trkkr
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class ImageDto(

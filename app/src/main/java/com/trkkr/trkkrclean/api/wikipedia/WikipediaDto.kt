@@ -1,6 +1,5 @@
-package com.trkkr.trkkrclean.API.Wikipedia
+package com.trkkr.trkkrclean.api.wikipedia
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class WikipediaDto(

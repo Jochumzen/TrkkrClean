@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.API.OpenRouteService
+package com.trkkr.trkkrclean.api.ors
 
 import com.google.gson.annotations.SerializedName
 

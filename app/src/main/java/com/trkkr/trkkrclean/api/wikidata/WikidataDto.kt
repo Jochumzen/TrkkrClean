@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.API.Wikidata
+package com.trkkr.trkkrclean.api.wikidata
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
