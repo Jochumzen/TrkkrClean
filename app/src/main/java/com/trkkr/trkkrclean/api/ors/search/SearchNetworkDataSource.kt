@@ -1,7 +1,4 @@
 package com.trkkr.trkkrclean.api.ors.search
-
-import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypeService
-import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesDataSource
 import javax.inject.Inject
 
 class SearchNetworkDataSource @Inject constructor(
