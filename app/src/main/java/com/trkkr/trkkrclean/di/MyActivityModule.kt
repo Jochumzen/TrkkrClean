@@ -1,13 +1,15 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.di
 
 import android.app.Application
-import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineProvider
+import com.trkkr.trkkrclean.Mapper
+import com.trkkr.trkkrclean.PermissionsUtil
+import com.trkkr.trkkrclean.TrkkrLocation
+import com.trkkr.trkkrclean.TrkkrMapView
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import javax.inject.Singleton
 
 
 @Module
