@@ -10,6 +10,4 @@ interface SearchService {
         @Query("focus.point.lon") lon: String,
         @Query("focus.point.lat") lat: String
     ): SearchDto
-
-    abstract fun search(): SearchDto
 }
