@@ -1,7 +1,7 @@
 package com.trkkr.trkkrclean.api.trkkr.osmtype
 import retrofit2.http.GET
 
-interface OSMTypeService {
+interface OSMTypesService {
     @GET("/api/osmtype/")
     suspend fun osmType(): OSMTypesDto
 }

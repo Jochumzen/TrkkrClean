@@ -4,6 +4,7 @@ import com.trkkr.trkkrclean.api.ors.directions.DirectionsService
 import com.trkkr.trkkrclean.api.ors.reverseSearch.ReverseSearchService
 import com.trkkr.trkkrclean.api.ors.search.SearchService
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypeService
+import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesService
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesDataSource
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesNetworkDataSource
 import com.trkkr.trkkrclean.api.wikidata.WikidataService
@@ -33,7 +34,7 @@ object NetworkModule {
                 .baseUrl("http://jochumzen-001-site1.htempurl.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(OSMTypeService::class.java)
+                .create(OSMTypesService::class.java)
         )
 
     @Singleton
