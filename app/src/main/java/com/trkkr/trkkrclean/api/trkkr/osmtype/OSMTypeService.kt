@@ -3,5 +3,5 @@ import retrofit2.http.GET
 
 interface OSMTypeService {
     @GET("/api/osmtype/")
-    suspend fun OsmType(): OSMTypesDto
+    suspend fun osmType(): OSMTypesDto
 }

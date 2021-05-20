@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.api.ors
+package com.trkkr.trkkrclean.api.ors.directions
 
 import com.google.gson.annotations.SerializedName
 

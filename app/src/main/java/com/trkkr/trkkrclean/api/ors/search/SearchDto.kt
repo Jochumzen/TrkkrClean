@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.api.ors
+package com.trkkr.trkkrclean.api.ors.search
 
 import com.google.gson.annotations.SerializedName
 
@@ -122,6 +122,15 @@ data class SearchDto(
         @SerializedName("name")
         var name: String? = null,
 
+        @SerializedName("confidence")
+        var confidence: Double? = null,
+
+        @SerializedName("distance")
+        var distance: Double? = null,
+
+        @SerializedName("match_type")
+        var matchType: String? = null,
+
         @SerializedName("accuracy")
         var accuracy: String? = null,
 
@@ -196,10 +205,25 @@ data class SearchDto(
         @SerializedName("layers")
         var layers: List<String>? = null,
 
+        @SerializedName("sources")
+        var sources: List<String>? = null,
+
         @SerializedName("private")
-        var _private: Boolean? = null,
+        var private: Boolean? = null,
+
+        @SerializedName("focus.point.lat")
+        var lat: Int? = null,
+
+        @SerializedName("focus.point.lon")
+        var lon: Int? = null,
+
+        @SerializedName("boundary.country")
+        var bc: List<String>? = null,
 
         @SerializedName("lang")
         var lang: Lang? = null,
+
+        @SerializedName("querySize")
+        var querySize: Int? = null
     )
 }

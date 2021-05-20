@@ -5,5 +5,5 @@ import javax.inject.Inject
 class OSMTypesNetworkDataSource @Inject constructor (
     private val osmTypeService: OSMTypeService
 ) : OSMTypesDataSource {
-    override suspend fun fetchOsmTypes() = osmTypeService.OsmType()
+    override suspend fun fetchOsmTypes() = osmTypeService.osmType()
 }

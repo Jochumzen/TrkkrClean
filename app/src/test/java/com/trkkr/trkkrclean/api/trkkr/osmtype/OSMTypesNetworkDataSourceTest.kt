@@ -1,15 +1,13 @@
 package com.trkkr.trkkrclean.api.trkkr.osmtype
 
-
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Assert.*
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.buffer
 import okio.source
-import org.junit.After
-import org.junit.Assert.*
-
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
