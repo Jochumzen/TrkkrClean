@@ -34,7 +34,7 @@ class SearchNetworkDataSourceTest {
         mockWebServer.enqueueResponse("searchResult.json", 200)
 
         runBlocking {
-            val actual = sut.fetchSearchResult()
+            val actual = sut.fetchSearchResult(api_key = "5b3ce3597851110001cf6248782b9145cbb64ba2a7b5962e1023c1de", text = "Lund", lon = "55", lat = "13")
 
             val lang = SearchDto.Lang(name = "Swedish", iso6391 = "sv", iso6393 = "swe", defaulted = false)
 
@@ -65,7 +65,12 @@ class SearchNetworkDataSourceTest {
 
             val features = listOf(feature)
 
-            val expected = SearchDto(geocoding = geoCoding, type = "FeatureCollection", features = features)
+            val expected = SearchDto(geocoding = geoCoding, type = "FeatureCollection", features = features, bbox = listOf(
+                13.1457503323,
+                55.678776639,
+                13.2553449291,
+                55.742051341
+            ))
 
             assertEquals(expected, actual)
 
