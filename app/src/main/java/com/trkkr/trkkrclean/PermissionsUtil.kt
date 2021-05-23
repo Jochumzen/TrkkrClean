@@ -15,10 +15,13 @@ class PermissionsUtil @Inject constructor(): PermissionsListener {
 
     private var onGrantedCallBack: ((Boolean) -> Unit)? = null
 
+    var x = 1
+
     fun request(
         activity: Activity,
         onGrantedCallBack: ((Boolean) -> Unit)? = null
     ) {
+        x = 2
         this.onGrantedCallBack = onGrantedCallBack
 
         permissionsManager.requestLocationPermissions(activity)

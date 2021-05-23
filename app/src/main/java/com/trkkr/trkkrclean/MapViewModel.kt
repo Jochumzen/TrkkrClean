@@ -18,10 +18,10 @@ constructor(
 
 ) : ViewModel() {
 
-    private val _locationFlyer = MutableLiveData<Location>()
-    val locationFlyer: LiveData<Location> = _locationFlyer
+    private val _mapBoxStyle = MutableLiveData<String>()
+    val mapBoxStyle: LiveData<String> = _mapBoxStyle
 
-    fun updateLocationFlyer(location: Location) {
-        _locationFlyer.value = location
+    fun updateMapBoxStyle(style: String) {
+        _mapBoxStyle.value = style
     }
 }

@@ -27,15 +27,6 @@ class TrkkrMapView @Inject constructor(
         Log.d("MyDebug", "mapview in setup: $mapView")
         mapView?.getMapAsync { mapboxMap ->
 
-            /*
-            val x = CameraUpdateFactory.newCameraPosition(CameraPosition.Builder()
-                .target(LatLng(51.50550, -0.07520))
-                .zoom(10.0)
-                .tilt(20.0)
-                .build())
-            mapboxMap.moveCamera(x)
-
-             */
             Log.d("MyDebug", "mbm in setup: $mapboxMap")
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
                 Log.d("MyDebug", "style in setup: $it")

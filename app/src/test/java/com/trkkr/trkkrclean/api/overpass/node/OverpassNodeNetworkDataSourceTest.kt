@@ -1,6 +1,5 @@
 package com.trkkr.trkkrclean.api.overpass.node
 
-import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesDto
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
