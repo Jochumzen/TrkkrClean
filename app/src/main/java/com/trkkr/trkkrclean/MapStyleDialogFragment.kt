@@ -104,7 +104,6 @@ class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
                     setWhiteColorOnButtonAndTv(mapViewModel.mapStyleInUse)
                 }
                 mapViewModel.mapStyleInUse = satelliteStyle
-                // SET MAP STYLE?
 
                 } it.equals(trafficStyle) -> { // Traffic style
 
@@ -114,7 +113,6 @@ class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
                     setWhiteColorOnButtonAndTv(mapViewModel.mapStyleInUse)
                 }
                 mapViewModel.mapStyleInUse = trafficStyle
-                // SET MAP STYLE?
 
                 } it.equals(walkingStyle) -> { // Walking style
 
@@ -124,7 +122,6 @@ class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
                     setWhiteColorOnButtonAndTv(mapViewModel.mapStyleInUse)
                 }
                 mapViewModel.mapStyleInUse = walkingStyle
-                // SET MAP STYLE?
 
                 }
             }
