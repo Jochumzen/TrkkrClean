@@ -1,7 +1,5 @@
 package com.trkkr.trkkrclean.api.ors.search
 
-import junit.framework.TestCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.*
