@@ -80,6 +80,12 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         }
 
         Log.d("MyDebug", "vm: $mapViewModel")
+
+        // Set the map style
+        mapViewModel.mapBoxStyle.observe(viewLifecycleOwner, {
+            mapboxMap?.setStyle(it)
+        })
+
         return binding.root
 
     }

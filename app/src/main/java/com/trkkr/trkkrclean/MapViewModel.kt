@@ -17,8 +17,6 @@ class MapViewModel @Inject constructor() : ViewModel() {
     private val _mapBoxStyle = MutableLiveData<String>()
     val mapBoxStyle: LiveData<String> = _mapBoxStyle
 
-    var mapStyleInUse: String = "mapbox://styles/mapbox/streets-v11"
-
     fun updateMapBoxStyle(style: String) {
         _mapBoxStyle.value = style
     }

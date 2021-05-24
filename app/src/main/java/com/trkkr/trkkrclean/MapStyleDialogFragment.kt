@@ -14,12 +14,14 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.maps.Style.*
 import com.trkkr.trkkrclean.databinding.DialogMapStylesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
+@SuppressLint("StaticFieldLeak")
 private var _binding: DialogMapStylesBinding? = null
 private val binding get() = _binding!!
 
@@ -28,10 +30,10 @@ class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
 
     private val mapViewModel: MapViewModel by activityViewModels()
 
-    private val defaultText: TextView? = null
-    private  var satelliteText:TextView? = null
-    private  var trafficText:TextView? = null
-    private  var walkingText:TextView? = null
+    private val defaultText:TextView? = null
+    private var satelliteText:TextView? = null
+    private var trafficText:TextView? = null
+    private var walkingText:TextView? = null
 
     private var defaultBtn:  ImageView? = null
     private var satelliteBtn: ImageView? = null
@@ -49,81 +51,43 @@ class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
         savedInstanceState: Bundle?
     ): View {
         _binding = DialogMapStylesBinding.inflate(inflater, container, false).apply {
-            satelliteStyleId.setOnClickListener {
-                mapViewModel.updateMapBoxStyle(SATELLITE)
-            }
+            mapboxStreetsStyleId.setOnClickListener { setWhiteColorOnButtons(); mapViewModel.updateMapBoxStyle(MAPBOX_STREETS) }
+            satelliteStyleId.setOnClickListener { setWhiteColorOnButtons(); mapViewModel.updateMapBoxStyle(SATELLITE) }
+            trafficLightStyleId.setOnClickListener { setWhiteColorOnButtons(); mapViewModel.updateMapBoxStyle(TRAFFIC_DAY) }
+            outdoorsStyleId.setOnClickListener { setWhiteColorOnButtons(); mapViewModel.updateMapBoxStyle(OUTDOORS) }
         }
 
         dialog?.setCanceledOnTouchOutside(true)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        defaultBtn = binding.mapboxStreetsStyleId
-        satelliteBtn = binding.satelliteStyleId
-        trafficBtn = binding.trafficLightStyleId
-        walkingBtn = binding.outdoorsStyleId
-
-        defaultBtn!!.setOnClickListener { mapViewModel.updateMapBoxStyle(MAPBOX_STREETS) }
-        satelliteBtn!!.setOnClickListener { mapViewModel.updateMapBoxStyle(SATELLITE) }
-        trafficBtn!!.setOnClickListener { mapViewModel.updateMapBoxStyle(TRAFFIC_DAY) }
-        walkingBtn!!.setOnClickListener { mapViewModel.updateMapBoxStyle(OUTDOORS) }
-
         return binding.root
     }
-
 
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
-
         setWindow()
-        //val x = mapViewModel.mapBoxStyle.value
 
-        // Change in map style
+        // For checking which style is used initially
+        when (mapViewModel.mapBoxStyle.value) {
+            null -> setBlueColorOnButtonAndTv(binding.mapboxStreetsStyleId, binding.textMapLayoutDefault)
+            defaultStyle -> setBlueColorOnButtonAndTv(binding.mapboxStreetsStyleId, binding.textMapLayoutDefault)
+            satelliteStyle -> setBlueColorOnButtonAndTv(binding.satelliteStyleId, binding.textMapLayoutSatellite)
+            trafficStyle -> setBlueColorOnButtonAndTv(binding.trafficLightStyleId, binding.textMapLayoutTraffic)
+            walkingStyle -> setBlueColorOnButtonAndTv(binding.outdoorsStyleId, binding.textMapLayoutWalking)
+        }
+
+        // For checking when pressing another style button
         mapViewModel.mapBoxStyle.observe(viewLifecycleOwner, {
-            when {
-                it.equals(defaultStyle) -> { // Default style
+            when (it) {
+                defaultStyle -> setBlueColorOnButtonAndTv(binding.mapboxStreetsStyleId, binding.textMapLayoutDefault)
+                satelliteStyle -> setBlueColorOnButtonAndTv(binding.satelliteStyleId, binding.textMapLayoutSatellite)
+                trafficStyle -> setBlueColorOnButtonAndTv(binding.trafficLightStyleId, binding.textMapLayoutTraffic)
+                walkingStyle -> setBlueColorOnButtonAndTv(binding.outdoorsStyleId, binding.textMapLayoutWalking)
 
-                // Set blue color
-                setBlueColorOnButtonAndTv(defaultBtn, defaultText)
-
-                // Set white color
-                if (it != mapViewModel.mapStyleInUse) {
-                    setWhiteColorOnButtonAndTv(mapViewModel.mapStyleInUse)
-                }
-                mapViewModel.mapStyleInUse = defaultStyle
-                // SET MAP STYLE?
-
-
-                } it.equals(satelliteStyle) -> { // Satellite style
-
-                setBlueColorOnButtonAndTv(satelliteBtn, satelliteText)
-
-                if (it != mapViewModel.mapStyleInUse) {
-                    setWhiteColorOnButtonAndTv(mapViewModel.mapStyleInUse)
-                }
-                mapViewModel.mapStyleInUse = satelliteStyle
-
-                } it.equals(trafficStyle) -> { // Traffic style
-
-                setBlueColorOnButtonAndTv(trafficBtn, trafficText)
-
-                if (it != mapViewModel.mapStyleInUse) {
-                    setWhiteColorOnButtonAndTv(mapViewModel.mapStyleInUse)
-                }
-                mapViewModel.mapStyleInUse = trafficStyle
-
-                } it.equals(walkingStyle) -> { // Walking style
-
-                setBlueColorOnButtonAndTv(walkingBtn, walkingText)
-
-                if (it != mapViewModel.mapStyleInUse) {
-                    setWhiteColorOnButtonAndTv(mapViewModel.mapStyleInUse)
-                }
-                mapViewModel.mapStyleInUse = walkingStyle
-
-                }
+                else -> setBlueColorOnButtonAndTv(binding.mapboxStreetsStyleId, binding.textMapLayoutDefault)
             }
         })
 
@@ -149,29 +113,19 @@ class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(api = Build.VERSION_CODES.M)
-    fun setWhiteColorOnButtonAndTv(mapStyleInUse: String?) {
-        when (mapStyleInUse) {
-            defaultStyle -> {
-                defaultBtn!!.foreground = resources.getDrawable(R.drawable.button_border_white)
-                defaultText!!.setTextColor(resources.getColor(R.color.originalTextColor))
-            }
-            satelliteStyle -> {
-                satelliteBtn!!.foreground = resources.getDrawable(R.drawable.button_border_white)
-                satelliteText!!.setTextColor(resources.getColor(R.color.originalTextColor))
-            }
-            trafficStyle -> {
-                trafficBtn!!.foreground = resources.getDrawable(R.drawable.button_border_white)
-                trafficText!!.setTextColor(resources.getColor(R.color.originalTextColor))
-            }
-            walkingStyle -> {
-                walkingBtn!!.foreground = resources.getDrawable(R.drawable.button_border_white)
-                walkingText!!.setTextColor(resources.getColor(R.color.originalTextColor))
-            }
-        }
+    fun setWhiteColorOnButtons() {
+        binding.mapboxStreetsStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
+        binding.textMapLayoutDefault.setTextColor(resources.getColor(R.color.originalTextColor))
+
+        binding.satelliteStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
+        binding.textMapLayoutSatellite.setTextColor(resources.getColor(R.color.originalTextColor))
+
+        binding.trafficLightStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
+        binding.textMapLayoutTraffic.setTextColor(resources.getColor(R.color.originalTextColor))
+
+        binding.outdoorsStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
+        binding.textMapLayoutWalking.setTextColor(resources.getColor(R.color.originalTextColor))
     }
 
-    companion object {
-        const val TAG = "MapStyleDialog"
-
-    }
+    companion object { const val TAG = "MapStyleDialog" }
 }
