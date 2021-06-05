@@ -1,6 +1,7 @@
 package com.trkkr.trkkrclean
 
 import android.app.Activity
+import android.util.Log
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import javax.inject.Inject
@@ -15,23 +16,22 @@ class PermissionsUtil @Inject constructor(): PermissionsListener {
 
     private var onGrantedCallBack: ((Boolean) -> Unit)? = null
 
-    var x = 1
-
     fun request(
         activity: Activity,
         onGrantedCallBack: ((Boolean) -> Unit)? = null
     ) {
-        x = 2
         this.onGrantedCallBack = onGrantedCallBack
 
+        Log.d("MyDebug", "PU: Requesting perms. OnGrCN: $onGrantedCallBack")
         permissionsManager.requestLocationPermissions(activity)
     }
 
     override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-        //Later
+        Log.d("MyDebug", "ExplNeeded")
     }
 
     override fun onPermissionResult(granted: Boolean) {
+        Log.d("MyDebug", "PU: perms result. OnGrCN: $onGrantedCallBack, granted: $granted")
         onGrantedCallBack?.invoke(granted)
     }
 

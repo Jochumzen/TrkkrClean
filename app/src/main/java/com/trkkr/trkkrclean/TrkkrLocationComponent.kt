@@ -19,49 +19,51 @@ class TrkkrLocationComponent @Inject constructor(
 )  {
     private var weakContext: WeakReference<Context?>? = null
 
+    private var locationComponentEnabled: ((Boolean) -> Unit)? = null
+
     fun enableLocationComponent(
         context: Context,
-        mapboxMap: MapboxMap?
+        mapboxMap: MapboxMap?,
+        locationComponentEnabled: ((Boolean) -> Unit)? = null
     ) {
 
         weakContext = WeakReference(context)
-
+        this.locationComponentEnabled = locationComponentEnabled
         mapboxMap?.let {
             if (PermissionsManager.areLocationPermissionsGranted(context)) {
+
                 onLocationPermissionGranted(
                     context = this@TrkkrLocationComponent.context,
                     mapboxMap = mapboxMap
                 )
+                locationComponentEnabled?.invoke(true)
             } else {
+                Log.d("MyDebug", "No permission.")
                 requestPermission(mapboxMap)
             }
         }
     }
-
-    /*
-    fun getLastKnownLocation(mapboxMap: MapboxMap?) : Location? {
-        mapboxMap?.let{
-            return mapboxMap.locationComponent.lastKnownLocation
-        }
-    }
-
-     */
 
 
     private fun requestPermission(
         mapboxMap: MapboxMap
     ) {
         val permissionError = context?.getString(R.string.gps_toast_message)
-
+        Log.d("MyDebug", "TLC: Requesting perms.")
         permissionsUtil.request(context as Activity) { granted ->
+            Log.d("MyDebug", "TLC callback. granted: $granted")
+
             if (granted) {
                 onLocationPermissionGranted(
                     context = this@TrkkrLocationComponent.context,
                     mapboxMap = mapboxMap
                 )
+                locationComponentEnabled?.invoke(true)
             } else {
                 toaster.showToast(permissionError)
+                locationComponentEnabled?.invoke(false)
             }
+
         }
     }
 

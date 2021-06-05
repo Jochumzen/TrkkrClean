@@ -1,17 +1,14 @@
 package com.trkkr.trkkrclean
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.trkkr.trkkrclean.databinding.FragmentMapBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,13 +19,10 @@ import javax.inject.Inject
 class MapFragment : Fragment(R.layout.fragment_map) {
 
     @Inject
-    lateinit var trkkrMapView: TrkkrMapView
+    lateinit var trkkrMap: TrkkrMap
 
     @Inject
     lateinit var trkkrLocationComponent: TrkkrLocationComponent
-
-    @Inject
-    lateinit var trkkrLocation: TrkkrLocation
 
     private val mapViewModel: MapViewModel by activityViewModels()
 
@@ -53,18 +47,24 @@ class MapFragment : Fragment(R.layout.fragment_map) {
             //TrkkrMapView has a weak ref to the MapView.
             //setUp calls getMapAsync which creates a MapboxMap object. Then setStyle (async) is called on the MapboxMap object.
             //When all is done, the callback is implemented with the MabboxMap object which we save globally.
-            trkkrMapView.setup(mapView) {
+            trkkrMap.setup(mapView) {
                 mapboxMap = it
                 Log.d("MyDebug", "TrkkrMapView.setup completed. We have the MapboxMap: $mapboxMap")
 
-                //Enable location component (show current position). Enabled only with permsission.
-                trkkrLocationComponent.enableLocationComponent(context = requireActivity(), mapboxMap = mapboxMap)
+                //Enable location component (show current position). Requires location permission.
+                trkkrLocationComponent.enableLocationComponent(context = requireActivity(), mapboxMap = mapboxMap) { locationComponentEnabled ->
+                    Log.d("MyDebug", "LocationComponentEnabled: $locationComponentEnabled")
 
-                val currentLocation = mapboxMap?.locationComponent?.lastKnownLocation
-                Log.d("MyDebug", "Location: $currentLocation")
+                    mapViewModel.setLocationComponentEnabled(locationComponentEnabled)
 
-                if (currentLocation != null) {
-                    trkkrMapView.flyToLocation(currentLocation, mapboxMap)
+                    if(locationComponentEnabled) {
+                        val currentLocation = mapboxMap?.locationComponent?.lastKnownLocation
+                        Log.d("MyDebug", "MapFragment, currentLocation: $currentLocation")
+
+                        if (currentLocation != null) {
+                            trkkrMap.flyToLocation(currentLocation, mapboxMap)
+                        }
+                    }
                 }
 
             }
@@ -81,21 +81,33 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
         Log.d("MyDebug", "vm: $mapViewModel")
 
-        // Set the map style
-        mapViewModel.mapBoxStyle.observe(viewLifecycleOwner, {
-            mapboxMap?.setStyle(it)
-        })
-
         return binding.root
 
     }
 
+    private fun setMapboxClickListener(
+        mapboxMap: MapboxMap?
+    ) {
+        mapboxMap?.addOnMapClickListener { latLng ->
+            val screenPoint = mapboxMap.projection.toScreenLocation(latLng)
+            val features = mapboxMap.queryRenderedFeatures(screenPoint, "poi-label")
+
+            if (features.size > 0) {
+                //Assume that there can be only 1 "poi-label" layer
+                //mainActivityViewModel.mapClicked(features[0], point)
+            } else {
+                //mainActivityViewModel.mapClicked(null, point)
+            }
+            true
+        }
+    }
+
     private fun setupViewObservers() {
-        lifecycle.addObserver(trkkrMapView)
+        lifecycle.addObserver(trkkrMap)
 
         this@MapFragment.mapViewModel.run {
             mapBoxStyle.observe(viewLifecycleOwner, Observer {
-                val x = it
+                mapboxMap?.setStyle(it)
             })
         }
     }
@@ -112,3 +124,5 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     }
 
 }
+
+

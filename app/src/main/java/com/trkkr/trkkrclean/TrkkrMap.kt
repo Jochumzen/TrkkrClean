@@ -1,33 +1,44 @@
 package com.trkkr.trkkrclean
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.location.Location
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
+import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdate
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
+import com.mapbox.mapboxsdk.location.modes.CameraMode
+import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-class TrkkrMapView @Inject constructor(
+class TrkkrMap @Inject constructor(
     private val mapper: Mapper
 ) : LifecycleObserver {
 
     private var weakMapView: WeakReference<MapView?>? = null
 
-    fun setup(mapView: MapView?, callback: (MapboxMap) -> Unit) {
+    fun setup(
+        mapView: MapView?,
+        callback: (MapboxMap) -> Unit
+    ) {
         weakMapView = WeakReference(mapView)
-        Log.d("MyDebug", "mapview in setup: $mapView")
+
         mapView?.getMapAsync { mapboxMap ->
 
             Log.d("MyDebug", "mbm in setup: $mapboxMap")
+
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
                 Log.d("MyDebug", "style in setup: $it")
                 callback(mapboxMap)

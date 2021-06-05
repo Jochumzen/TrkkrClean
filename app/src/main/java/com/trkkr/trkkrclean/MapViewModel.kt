@@ -20,4 +20,16 @@ class MapViewModel @Inject constructor() : ViewModel() {
     fun updateMapBoxStyle(style: String) {
         _mapBoxStyle.value = style
     }
+
+    //Whether or not the Mapbox LocationComponent is enabled or not
+    private var locationComponentEnabled : Boolean = false
+
+    fun setLocationComponentEnabled(value: Boolean) {
+        locationComponentEnabled = value
+    }
+
+    fun getLocationComponentEnabled() : Boolean {
+        return locationComponentEnabled
+    }
+
 }
