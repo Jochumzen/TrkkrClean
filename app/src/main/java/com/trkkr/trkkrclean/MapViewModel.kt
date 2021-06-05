@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mapbox.geojson.Feature
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -30,6 +31,10 @@ class MapViewModel @Inject constructor() : ViewModel() {
 
     fun getLocationComponentEnabled() : Boolean {
         return locationComponentEnabled
+    }
+
+    fun setClickedFeature(feature: Feature) {
+
     }
 
 }

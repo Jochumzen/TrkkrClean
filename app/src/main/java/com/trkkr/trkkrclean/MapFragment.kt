@@ -67,6 +67,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                     }
                 }
 
+                setMapboxClickListener(mapboxMap)
             }
             setupViewObservers()
 
@@ -89,14 +90,20 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         mapboxMap: MapboxMap?
     ) {
         mapboxMap?.addOnMapClickListener { latLng ->
+
+            Log.d("MyDebug", "Map clicked: $latLng")
+
             val screenPoint = mapboxMap.projection.toScreenLocation(latLng)
+
+            //Assume that there can be at most 1 "poi-label" Feature
             val features = mapboxMap.queryRenderedFeatures(screenPoint, "poi-label")
 
             if (features.size > 0) {
-                //Assume that there can be only 1 "poi-label" layer
-                //mainActivityViewModel.mapClicked(features[0], point)
+                Log.d("MyDebug", "vm: $features[0]")
+                mapViewModel.setClickedFeature(features[0])
             } else {
-                //mainActivityViewModel.mapClicked(null, point)
+                Log.d("MyDebug", "No poi-label features at this point")
+                //Do nothing if there is no Feature at the position clicked
             }
             true
         }
