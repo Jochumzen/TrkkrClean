@@ -1,19 +1,16 @@
 package com.trkkr.trkkrclean.presentation
 
-import android.content.Context
-import android.location.Location
-import android.os.Bundle
-import android.widget.FrameLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.mapbox.geojson.Feature
+import com.trkkr.trkkrclean.architecture.DataState
+import com.trkkr.trkkrclean.architecture.StateEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
 @HiltViewModel
-class MapViewModel @Inject constructor() : ViewModel() {
+class MapViewModel @Inject constructor() : BaseViewModel<MapViewState>() {
 
     private val _mapBoxStyle = MutableLiveData<String>()
     val mapBoxStyle: LiveData<String> = _mapBoxStyle
@@ -33,8 +30,13 @@ class MapViewModel @Inject constructor() : ViewModel() {
         return locationComponentEnabled
     }
 
-    fun setClickedFeature(feature: Feature) {
+    fun setStateEvent(stateEvent: StateEvent) {
+        val job: Flow<DataState<MapViewState>?> = when(stateEvent) {
 
+            else -> {
+                emitInvalidStateEvent(stateEvent)
+            }
+        }
     }
 
 }
