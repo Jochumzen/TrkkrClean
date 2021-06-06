@@ -14,10 +14,9 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.maps.Style.*
 import com.trkkr.trkkrclean.databinding.DialogMapStylesBinding
+import com.trkkr.trkkrclean.presentation.MapViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

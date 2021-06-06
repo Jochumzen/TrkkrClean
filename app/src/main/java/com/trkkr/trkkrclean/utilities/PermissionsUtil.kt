@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.utilities
 
 import android.app.Activity
 import android.util.Log

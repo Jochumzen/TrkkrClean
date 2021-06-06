@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.trkkr.trkkrclean.R
 import com.trkkr.trkkrclean.databinding.MiniPoiModalBottomSheetBinding
 
 class MiniPoiDialogFragment : BottomSheetDialogFragment() {
