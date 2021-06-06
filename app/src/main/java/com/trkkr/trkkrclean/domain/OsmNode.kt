@@ -1,8 +1,7 @@
-package com.trkkr.trkkrclean.api.domain
+package com.trkkr.trkkrclean.domain
 
 
 data class OsmNode (
-    var version: Double,
     var elements: List<Element>
 ) {
     data class Element(
@@ -10,6 +9,11 @@ data class OsmNode (
         var id: Long,
         var lat: Double,
         var lon: Double,
+        var timestamp: String,
+        var version: Int,
+        var changeset: Long,
+        var user: String,
+        var uid: Long,
         var tags: Map<String, String>? = null
     )
 }

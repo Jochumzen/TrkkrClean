@@ -2,33 +2,24 @@
     "version": 0.6,
     "generator": "Overpass API 0.7.56.9 76e5016d",
     "osm3s": {
-        "timestamp_osm_base": "2021-05-17T17:49:56Z",
+        "timestamp_osm_base": "2021-06-06T13:23:27Z",
         "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
     },
     "elements": [
         {
             "type": "node",
-            "id": 2713060210,
-            "lat": 50.7320436,
-            "lon": 7.0967647,
+            "id": 6874973681,
+            "lat": 55.7276769,
+            "lon": 13.1749253,
+            "timestamp": "2020-10-05T12:08:46Z",
+            "version": 2,
+            "changeset": 91985217,
+            "user": "Jochumzen",
+            "uid": 4842557,
             "tags": {
-                "VRS:gemeinde": "BONN",
-                "VRS:ortsteil": "Innenstadt",
-                "VRS:ref": "61101",
-                "name": "Bonn Hauptbahnhof",
-                "network": "VRS",
-                "official_name": "Bonn Hbf",
-                "operator": "DB Netz AG",
-                "public_transport": "station",
-                "railway": "station",
-                "railway:ref": "KB",
-                "railway:station_category": "2",
-                "ref:ibnr": "8000044",
-                "toilets:wheelchair": "no",
-                "uic_ref": "8000044",
-                "wheelchair": "limited",
-                "wikidata": "Q55423",
-                "wikipedia": "de:Bonn Hauptbahnhof"
+                "name": "Honey Bunny Tattoo",
+                "shop": "tattoo",
+                "website": "www.honeybunnytattoo.se"
             }
         }
     ]

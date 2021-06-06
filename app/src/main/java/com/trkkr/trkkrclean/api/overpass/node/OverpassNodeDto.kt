@@ -19,6 +19,11 @@ data class OverpassNodeDto (
         var id: Long,
         var lat: Double,
         var lon: Double,
+        var timestamp: String,
+        var version: Int,
+        var changeset: Long,
+        var user: String,
+        var uid: Long,
         var tags: Map<String, String>? = null
     )
 }
