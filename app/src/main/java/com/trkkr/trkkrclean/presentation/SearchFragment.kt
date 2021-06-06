@@ -1,12 +1,11 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.trkkr.trkkrclean.databinding.FragmentMapBinding
+import com.trkkr.trkkrclean.R
 import com.trkkr.trkkrclean.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment(R.layout.fragment_search) {

@@ -1,13 +1,10 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.presentation
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.LinearLayout
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.maps.MapView
-import com.mapbox.mapboxsdk.maps.Style
+import com.trkkr.trkkrclean.utilities.PermissionsUtil
+import com.trkkr.trkkrclean.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
     }
+
 
 
     override fun onRequestPermissionsResult(

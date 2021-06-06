@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.presentation
 
 import android.content.Context
 import android.location.Location

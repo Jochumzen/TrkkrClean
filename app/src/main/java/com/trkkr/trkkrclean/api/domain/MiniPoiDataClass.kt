@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.api.domain
 
 import com.google.gson.annotations.SerializedName
 import com.trkkr.trkkrclean.api.trkkr.ImageDto

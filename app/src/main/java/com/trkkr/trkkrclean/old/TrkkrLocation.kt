@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.old
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -10,10 +10,9 @@ import com.mapbox.android.core.location.LocationEngineCallback
 import com.mapbox.android.core.location.LocationEngineRequest
 import com.mapbox.android.core.location.LocationEngineResult
 import com.mapbox.android.core.permissions.PermissionsManager
-import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
-import com.mapbox.mapboxsdk.location.modes.CameraMode
-import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.trkkr.trkkrclean.utilities.PermissionsUtil
+import com.trkkr.trkkrclean.presentation.MapViewModel
 import dagger.hilt.android.scopes.ActivityScoped
 import java.lang.Exception
 import java.lang.ref.WeakReference

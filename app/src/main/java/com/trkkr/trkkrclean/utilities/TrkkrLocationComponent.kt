@@ -1,15 +1,15 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.utilities
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.location.Location
 import android.util.Log
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.trkkr.trkkrclean.R
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 

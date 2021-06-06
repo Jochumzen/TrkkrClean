@@ -3,12 +3,12 @@ package com.trkkr.trkkrclean.di
 import android.app.Application
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineProvider
-import com.trkkr.trkkrclean.*
+import com.trkkr.trkkrclean.utilities.Mapper
+import com.trkkr.trkkrclean.utilities.Toaster
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import javax.inject.Singleton
 
 
 @Module
