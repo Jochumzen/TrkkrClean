@@ -146,8 +146,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                 val mapStateEvent : MapStateEvent.GetMiniPoiEvent =
                     MapStateEvent.GetMiniPoiEvent(latLng, features[0])
 
-
-                mapViewModel.setClickedFeature(features[0])
+                mapViewModel.setStateEvent(mapStateEvent)
             } else {
                 Log.d("MyDebug", "No poi-label features at this point")
                 //Do nothing if there is no Feature at the position clicked
