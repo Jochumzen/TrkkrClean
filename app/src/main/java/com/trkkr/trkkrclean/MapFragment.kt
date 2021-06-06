@@ -87,7 +87,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
             mapStyleFab.setOnClickListener {
                 val mapStyleDialog = MapStyleDialogFragment().show(childFragmentManager, MapStyleDialogFragment.TAG)
             }
-            
+
             val miniPoiSheetView : ConstraintLayout = miniPoiSheet.miniPoiSheet
             bottomSheetBehavior = BottomSheetBehavior.from(miniPoiSheetView)
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
