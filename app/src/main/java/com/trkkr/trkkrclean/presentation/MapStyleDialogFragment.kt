@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.mapbox.mapboxsdk.maps.Style.*
@@ -97,24 +98,24 @@ class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
     @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(api = Build.VERSION_CODES.M)
     fun setBlueColorOnButtonAndTv(usedView: ImageView?, usedTv: TextView?) {
-        usedView?.foreground = resources.getDrawable(R.drawable.button_border)
-        usedTv?.setTextColor(resources.getColor(R.color.blue))
+        usedView?.foreground = ContextCompat.getDrawable(requireContext(), R.drawable.button_border)
+        usedTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(api = Build.VERSION_CODES.M)
     fun setWhiteColorOnButtons() {
-        binding.mapboxStreetsStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
-        binding.textMapLayoutDefault.setTextColor(resources.getColor(R.color.originalTextColor))
+        binding.mapboxStreetsStyleId.foreground = ContextCompat.getDrawable(requireContext(), R.drawable.button_border_white)
+        binding.textMapLayoutDefault.setTextColor(ContextCompat.getColor(requireContext(), R.color.originalTextColor))
 
-        binding.satelliteStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
-        binding.textMapLayoutSatellite.setTextColor(resources.getColor(R.color.originalTextColor))
+        binding.satelliteStyleId.foreground = ContextCompat.getDrawable(requireContext(), R.drawable.button_border_white)
+        binding.textMapLayoutSatellite.setTextColor(ContextCompat.getColor(requireContext(), R.color.originalTextColor))
 
-        binding.trafficLightStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
-        binding.textMapLayoutTraffic.setTextColor(resources.getColor(R.color.originalTextColor))
+        binding.trafficLightStyleId.foreground = ContextCompat.getDrawable(requireContext(), R.drawable.button_border_white)
+        binding.textMapLayoutTraffic.setTextColor(ContextCompat.getColor(requireContext(), R.color.originalTextColor))
 
-        binding.outdoorsStyleId.foreground = resources.getDrawable(R.drawable.button_border_white)
-        binding.textMapLayoutWalking.setTextColor(resources.getColor(R.color.originalTextColor))
+        binding.outdoorsStyleId.foreground = ContextCompat.getDrawable(requireContext(), R.drawable.button_border_white)
+        binding.textMapLayoutWalking.setTextColor(ContextCompat.getColor(requireContext(), R.color.originalTextColor))
     }
 
     companion object { const val TAG = "MapStyleDialog" }

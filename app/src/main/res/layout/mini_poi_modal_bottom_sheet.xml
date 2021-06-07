@@ -6,23 +6,95 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/mini_poi_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:src="@drawable/lunds_domkyrka"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/scrollView_RL"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="more stuff here"
-        android:textSize="@dimen/font_size_16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mini_poi_image" />
+        android:background="@drawable/edit_round">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/miniPoiImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/POI_Info"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_below="@+id/miniPoiImage"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/poiInfoName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/poiInfoTypeAndDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:textSize="15sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/poiInfoOpeningHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:textSize="15sp" />
+
+            <HorizontalScrollView
+                android:id="@+id/poi_info_scrollView_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/poi_info_directions_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_round"
+                        android:backgroundTintMode="@color/colorDirectionsBackground"
+                        android:padding="5dp"
+                        android:text="Directions" />
+
+                    <Button
+                        android:id="@+id/poi_info_call_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_round"
+                        android:padding="5dp"
+                        android:text="Call" />
+
+                    <Button
+                        android:id="@+id/poi_info_save_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_round"
+                        android:padding="5dp"
+                        android:text="Save" />
+
+                    <Button
+                        android:id="@+id/poi_info_share_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_round"
+                        android:padding="5dp"
+                        android:text="Share" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
