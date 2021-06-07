@@ -1,15 +1,13 @@
 package com.trkkr.trkkrclean.domain
 
-
-data class OsmNode (
+data class OsmWay (
     var type: String,
     var id: Long,
-    var lat: Double,
-    var lon: Double,
     var timestamp: String,
     var version: Int,
     var changeset: Long,
     var user: String,
     var uid: Long,
+    var nodes: List<Long>? = null,
     var tags: Map<String, String>? = null
 )

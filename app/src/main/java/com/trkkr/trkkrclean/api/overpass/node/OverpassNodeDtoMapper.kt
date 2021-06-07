@@ -3,20 +3,17 @@ package com.trkkr.trkkrclean.api.overpass.node
 import com.trkkr.trkkrclean.domain.DomainMapper
 import com.trkkr.trkkrclean.domain.OsmNode
 
-class OverpassNodeDtoMapper : DomainMapper<OverpassNodeDto, OsmNode> {
-    override fun mapToDomainModel(model: OverpassNodeDto): OsmNode {
-        return OsmNode(mapElementsToDomainModel(model.elements))
+class OverpassNodeDtoMapper : DomainMapper<OverpassNodeDto, List<OsmNode>> {
+
+    override fun mapToDomainModel(model: OverpassNodeDto): List<OsmNode> {
+        return model.elements.map { mapNodeDtoElementToNode(it) }
     }
 
-    private fun mapElementToDomainModel(model: OverpassNodeDto.Element): OsmNode.Element {
-        return OsmNode.Element(model.type, model.id, model.lat, model.lon, model.timestamp, model.version, model.changeset, model.user, model.uid, model.tags)
+    private fun mapNodeDtoElementToNode(element: OverpassNodeDto.Element): OsmNode {
+        return OsmNode(element.type, element.id, element.lat, element.lon, element.timestamp, element.version, element.changeset, element.user, element.uid, element.tags)
     }
 
-    private fun mapElementsToDomainModel(model: List<OverpassNodeDto.Element>): List<OsmNode.Element> {
-        return model.map { mapElementToDomainModel(it) }
-    }
-
-    override fun mapFromDomainModel(domainModel: OsmNode): OverpassNodeDto {
+    override fun mapFromDomainModel(domainModel: List<OsmNode>): OverpassNodeDto {
         TODO("Not yet implemented")
     }
 

@@ -76,26 +76,22 @@ class OverpassNodeNetworkDataSourceTest() {
             val actual = sut.fetchNode("data=[out:json];(node(2713060210););out;")
 
             val expected = OsmNode(
-                elements = listOf(
-                    OsmNode.Element(
-                        type = "node",
-                        id = 6874973681,
-                        lat = 55.7276769,
-                        lon = 13.1749253,
-                        timestamp = "2020-10-05T12:08:46Z",
-                        version = 2,
-                        changeset = 91985217,
-                        user = "Jochumzen",
-                        uid = 4842557,
-                        tags = mapOf(
-                            "name" to "Honey Bunny Tattoo",
-                            "shop" to "tattoo",
-                            "website" to  "www.honeybunnytattoo.se"
-                        )
-                    )
+                type = "node",
+                id = 6874973681,
+                lat = 55.7276769,
+                lon = 13.1749253,
+                timestamp = "2020-10-05T12:08:46Z",
+                version = 2,
+                changeset = 91985217,
+                user = "Jochumzen",
+                uid = 4842557,
+                tags = mapOf(
+                    "name" to "Honey Bunny Tattoo",
+                    "shop" to "tattoo",
+                    "website" to  "www.honeybunnytattoo.se"
                 )
             )
-            assertEquals(expected, overpassNodeDtoMapper.mapToDomainModel(actual))
+            assertEquals(expected, overpassNodeDtoMapper.mapToDomainModel(actual)[0])
         }
     }
 
