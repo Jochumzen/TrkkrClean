@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean
+package com.trkkr.trkkrclean.presentation
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.mapbox.mapboxsdk.maps.Style.*
+import com.trkkr.trkkrclean.R
 import com.trkkr.trkkrclean.databinding.DialogMapStylesBinding
 import com.trkkr.trkkrclean.presentation.MapViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,16 +29,6 @@ private val binding get() = _binding!!
 class MapStyleDialogFragment : DialogFragment(R.layout.dialog_map_styles) {
 
     private val mapViewModel: MapViewModel by activityViewModels()
-
-    private val defaultText:TextView? = null
-    private var satelliteText:TextView? = null
-    private var trafficText:TextView? = null
-    private var walkingText:TextView? = null
-
-    private var defaultBtn:  ImageView? = null
-    private var satelliteBtn: ImageView? = null
-    private var trafficBtn: ImageView? = null
-    private var walkingBtn: ImageView? = null
 
     private val defaultStyle = "mapbox://styles/mapbox/streets-v11"
     private val satelliteStyle = "mapbox://styles/mapbox/satellite-v9"

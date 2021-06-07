@@ -65,7 +65,6 @@ class OverpassNodeNetworkDataSourceTest() {
         }
     }
 
-
     @Test
     fun `should fetch node correctly and map to domain model`() {
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.trkkr.trkkrclean.*
 import com.trkkr.trkkrclean.databinding.FragmentMapBinding
@@ -36,8 +37,6 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     private val binding get() = _binding!!
 
     private var mapboxMap: MapboxMap? = null
-
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,7 +87,23 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                 )
             }
 
-            val miniPoiSheetView : ConstraintLayout = miniPoiSheet.miniPoiSheet
+            // https://medium.com/over-engineering/hands-on-with-material-components-for-android-bottom-sheet-970c5f0f1840
+
+            val modalBottomSheet = MiniPoiDialogFragment()
+            modalBottomSheet.show(childFragmentManager, MiniPoiDialogFragment.TAG)
+
+            /*val modalBottomSheetBehavior = (modalBottomSheet.dialog as BottomSheetDialog).behavior
+            modalBottomSheetBehavior.isDraggable = true
+            modalBottomSheetBehavior.isHideable = true*/
+            // modalBottomSheetBehavior.peekHeight // Set how high the modal sheet can be when it's just "mini poi"
+
+            showMiniPoi.setOnClickListener {
+                modalBottomSheet.also {
+                    it.show(childFragmentManager, MiniPoiDialogFragment.TAG)
+                }
+            }
+
+            /*val miniPoiSheetView : ConstraintLayout = miniPoiSheet.miniPoiSheet
             bottomSheetBehavior = BottomSheetBehavior.from(miniPoiSheetView)
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
@@ -118,7 +133,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
             miniPoiSheet.miniPoiImage.setOnClickListener {
                 Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
 
         Log.d("MyDebug", "vm: $mapViewModel")

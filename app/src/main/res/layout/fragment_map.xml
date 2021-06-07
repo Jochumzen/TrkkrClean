@@ -112,9 +112,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/miniPoiSheet"
-        layout="@layout/mini_poi_persistent_bottom_sheet" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
