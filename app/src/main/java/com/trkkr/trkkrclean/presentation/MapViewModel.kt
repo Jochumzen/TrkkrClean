@@ -1,7 +1,9 @@
 package com.trkkr.trkkrclean.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.mapbox.geojson.Feature
 import com.trkkr.trkkrclean.architecture.DataState
 import com.trkkr.trkkrclean.architecture.StateEvent
 import com.trkkr.trkkrclean.domain.MiniPoi
@@ -13,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    //private val getMiniPoi: GetMiniPoi
+    private val getMiniPoi: GetMiniPoi
 ) : BaseViewModel<MapViewState>() {
 
     //Keeps track of MapBox Style, see https://docs.mapbox.com/android/maps/guides/styling-map/
@@ -43,18 +45,24 @@ class MapViewModel @Inject constructor(
         return locationComponentEnabled
     }
 
-    fun setStateEvent(stateEvent: StateEvent) {
+    override fun setStateEvent(stateEvent: StateEvent) {
+
         val job: Flow<DataState<MapViewState>?> = when(stateEvent) {
-/*
+
+
             is MapStateEvent.GetMiniPoiEvent -> {
                 getMiniPoi.execute(stateEvent)
             }
 
- */
             else -> {
                 emitInvalidStateEvent(stateEvent)
             }
         }
+        launchJob(stateEvent, job)
+    }
+
+    override fun handleNewData(data: MapViewState) {
+        Log.d("MyDebug", "vm: $data")
     }
 
 }

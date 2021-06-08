@@ -16,7 +16,7 @@ import java.io.IOException
 /**
  * Reference: https://medium.com/@douglas.iacovelli/how-to-handle-errors-with-retrofit-and-coroutines-33e7492a912
  */
-const val NETWORK_TIMEOUT = 6000L
+const val NETWORK_TIMEOUT = 12000L
 const val CACHE_TIMEOUT = 2000L
 const val ERROR_UNKNOWN = "Unknown error"
 

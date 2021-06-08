@@ -1,20 +1,23 @@
 package com.trkkr.trkkrclean.di
 
+import com.example.play71.network.NationalityDtoMapper
+import com.example.play71.network.NationalityService
 import com.trkkr.trkkrclean.api.ors.directions.DirectionsService
 import com.trkkr.trkkrclean.api.ors.reverseSearch.ReverseSearchService
 import com.trkkr.trkkrclean.api.ors.search.SearchService
+import com.trkkr.trkkrclean.api.overpass.node.OverpassNodeDtoMapper
 import com.trkkr.trkkrclean.api.overpass.node.OverpassNodeService
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesService
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesDataSource
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesNetworkDataSource
 import com.trkkr.trkkrclean.api.wikidata.WikidataService
 import com.trkkr.trkkrclean.api.wikipedia.WikipediaService
-import com.trkkr.trkkrclean.di.Constants.DIRECTIONS_URL
-import com.trkkr.trkkrclean.di.Constants.OVERPASS_URL
-import com.trkkr.trkkrclean.di.Constants.REVERSE_SEARCH_URL
-import com.trkkr.trkkrclean.di.Constants.SEARCH_URL
-import com.trkkr.trkkrclean.di.Constants.WIKIDATA_URL
-import com.trkkr.trkkrclean.di.Constants.WIKIPEDIA_URL
+import com.trkkr.trkkrclean.di.URLs.DIRECTIONS_URL
+import com.trkkr.trkkrclean.di.URLs.OVERPASS_URL
+import com.trkkr.trkkrclean.di.URLs.REVERSE_SEARCH_URL
+import com.trkkr.trkkrclean.di.URLs.SEARCH_URL
+import com.trkkr.trkkrclean.di.URLs.WIKIDATA_URL
+import com.trkkr.trkkrclean.di.URLs.WIKIPEDIA_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -69,6 +72,12 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    fun provideOverpassNodeDtoMapper() : OverpassNodeDtoMapper {
+        return OverpassNodeDtoMapper()
+    }
+
+    @Singleton
+    @Provides
     fun provideOverpassNodeService(): OverpassNodeService {
         return Retrofit.Builder()
             .baseUrl(OVERPASS_URL)
@@ -95,5 +104,22 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(WikipediaService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNationalityMapper() : NationalityDtoMapper {
+        return NationalityDtoMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideNationalityService() : NationalityService {
+        return Retrofit.Builder()
+            .baseUrl("https://random-data-api.com/")
+            //.addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))   ??
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(NationalityService::class.java)
     }
 }

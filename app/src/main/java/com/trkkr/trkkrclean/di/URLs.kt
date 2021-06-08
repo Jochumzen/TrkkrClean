@@ -1,6 +1,6 @@
 package com.trkkr.trkkrclean.di
 
-object Constants {
+object URLs {
 
     const val SEARCH_URL = "https://api.openrouteservice.org"
     const val REVERSE_SEARCH_URL = "https://api.openrouteservice.org"
