@@ -3,6 +3,7 @@ package com.trkkr.trkkrclean.presentation
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,34 +26,39 @@ class MiniPoiDialogFragment : BottomSheetDialogFragment() {
 
     private val mapViewModel: MapViewModel by activityViewModels()
 
-    private lateinit var binding: MiniPoiModalBottomSheetBinding
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var _binding: MiniPoiModalBottomSheetBinding? = null
+    private val binding get() = _binding!!
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = MiniPoiModalBottomSheetBinding.inflate(layoutInflater)
+        _binding = MiniPoiModalBottomSheetBinding.inflate(inflater, container, false).apply {
 
-        return inflater.inflate(R.layout.mini_poi_modal_bottom_sheet, container, false)
+            mapViewModel.miniPoi.observe(viewLifecycleOwner, {
+
+                miniPoiImage.setImageURI(Uri.parse(it.images?.get(0)))
+                poiInfoName.text = it.name
+                poiInfoTypeAndDistance.text = it.category + it.distance
+                poiInfoOpeningHours.text = "Open: " + it.open
+            })
+
+            miniPoiImage.setOnClickListener {
+                Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        Log.d("MyDebug", "running onCreateView in: $MiniPoiDialogFragment")
+
+        return binding.root
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mapViewModel.miniPoi.observe(viewLifecycleOwner, {
-
-            binding.miniPoiImage.setImageURI(Uri.parse(it.images?.get(0)))
-            binding.poiInfoName.text = it.name
-            binding.poiInfoTypeAndDistance.text = it.category + it.distance
-            binding.poiInfoOpeningHours.text = "Open: " + it.open
-        })
-
-        binding.miniPoiImage.setOnClickListener {
-            Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
-        }
     }
 }
