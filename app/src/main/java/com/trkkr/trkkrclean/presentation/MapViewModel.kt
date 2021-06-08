@@ -33,7 +33,6 @@ class MapViewModel @Inject constructor(
         _miniPoi.value = miniPoi
     }
 
-
     //Whether or not the Mapbox LocationComponent is enabled or not
     private var locationComponentEnabled : Boolean = false
 

@@ -12,14 +12,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.trkkr.trkkrclean.*
 import com.trkkr.trkkrclean.databinding.FragmentMapBinding
+import com.trkkr.trkkrclean.domain.MiniPoi
 import com.trkkr.trkkrclean.utilities.TrkkrLocationComponent
 import com.trkkr.trkkrclean.utilities.TrkkrMap
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class MapFragment : Fragment(R.layout.fragment_map) {
@@ -36,8 +37,6 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     private val binding get() = _binding!!
 
     private var mapboxMap: MapboxMap? = null
-
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,7 +87,25 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                 )
             }
 
-            val miniPoiSheetView : ConstraintLayout = miniPoiSheet.miniPoiSheet
+            // https://medium.com/over-engineering/hands-on-with-material-components-for-android-bottom-sheet-970c5f0f1840
+
+            val modalBottomSheet = MiniPoiDialogFragment()
+            modalBottomSheet.show(childFragmentManager, MiniPoiDialogFragment.TAG)
+
+            /*val modalBottomSheetBehavior = (modalBottomSheet.dialog as BottomSheetDialog).behavior
+            modalBottomSheetBehavior.isDraggable = true
+            modalBottomSheetBehavior.isHideable = true*/
+            // modalBottomSheetBehavior.peekHeight // Set how high the modal sheet can be when it's just "mini poi"
+
+            showMiniPoi.setOnClickListener {
+                modalBottomSheet.also {
+                    it.show(childFragmentManager, MiniPoiDialogFragment.TAG)
+                    var miniPoi = MiniPoi(id = 1481338431, name = "Lunds Domkyrka", category = "Place of Worship", distance = "10m", open = true, images = listOf("https://www.google.com/url?sa=i&url=https%3A%2F%2Fsv.wikipedia.org%2Fwiki%2FLunds_domkyrka&psig=AOvVaw2KX0I4nmcJf-IaBNOJqVPz&ust=1623146586125000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPCwvoiihfECFQAAAAAdAAAAABAD"))
+                    mapViewModel.updateMiniPoi(miniPoi)
+                }
+            }
+
+            /*val miniPoiSheetView : ConstraintLayout = miniPoiSheet.miniPoiSheet
             bottomSheetBehavior = BottomSheetBehavior.from(miniPoiSheetView)
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
@@ -118,7 +135,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
             miniPoiSheet.miniPoiImage.setOnClickListener {
                 Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
 
         Log.d("MyDebug", "vm: $mapViewModel")

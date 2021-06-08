@@ -1,59 +1,64 @@
 package com.trkkr.trkkrclean.presentation
 
+import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.trkkr.trkkrclean.R
 import com.trkkr.trkkrclean.databinding.MiniPoiModalBottomSheetBinding
+import java.net.URL
+import java.net.URLEncoder
 
 class MiniPoiDialogFragment : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "MiniPoiDialogFragment"
     }
-    private lateinit var binding: MiniPoiModalBottomSheetBinding
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
+    private val mapViewModel: MapViewModel by activityViewModels()
+
+    private var _binding: MiniPoiModalBottomSheetBinding? = null
+    private val binding get() = _binding!!
+
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = MiniPoiModalBottomSheetBinding.inflate(layoutInflater)
+        _binding = MiniPoiModalBottomSheetBinding.inflate(inflater, container, false).apply {
 
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.miniPoiSheet)
+            mapViewModel.miniPoi.observe(viewLifecycleOwner, {
 
-        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // Handle onslide
+                miniPoiImage.setImageURI(Uri.parse(it.images?.get(0)))
+                poiInfoName.text = it.name
+                poiInfoTypeAndDistance.text = it.category + it.distance
+                poiInfoOpeningHours.text = "Open: " + it.open
+            })
+
+            miniPoiImage.setOnClickListener {
+                Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
             }
+        }
 
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(context, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(context, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(context, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(context, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(context, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(context, "OTHER_STATE", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
+        Log.d("MyDebug", "running onCreateView in: $MiniPoiDialogFragment")
 
-        return inflater.inflate(R.layout.mini_poi_modal_bottom_sheet, container, false)
+        return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.miniPoiImage.setOnClickListener {
-            Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
-        }
     }
 }
