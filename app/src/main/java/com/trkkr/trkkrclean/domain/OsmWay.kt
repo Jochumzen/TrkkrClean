@@ -1,5 +1,9 @@
 package com.trkkr.trkkrclean.domain
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class OsmWay (
     var type: String,
     var id: Long,
@@ -10,4 +14,4 @@ data class OsmWay (
     var uid: Long,
     var nodes: List<Long>? = null,
     var tags: Map<String, String>? = null
-)
+) : Parcelable

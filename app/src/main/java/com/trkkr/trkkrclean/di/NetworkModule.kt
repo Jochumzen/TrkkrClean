@@ -106,20 +106,4 @@ object NetworkModule {
             .create(WikipediaService::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideNationalityMapper() : NationalityDtoMapper {
-        return NationalityDtoMapper()
-    }
-
-    @Singleton
-    @Provides
-    fun provideNationalityService() : NationalityService {
-        return Retrofit.Builder()
-            .baseUrl("https://random-data-api.com/")
-            //.addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))   ??
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(NationalityService::class.java)
-    }
 }

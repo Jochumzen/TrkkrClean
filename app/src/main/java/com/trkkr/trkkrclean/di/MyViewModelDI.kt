@@ -19,10 +19,8 @@ object MyViewModelDI {
     fun provideGetMiniPoi(
         overpassNodeService: OverpassNodeService,
         overpassNodeDtoMapper: OverpassNodeDtoMapper,
-        nationalityService: NationalityService,
-        nationalityDtoMapper: NationalityDtoMapper
     ) : GetMiniPoi {
-        return GetMiniPoi(overpassNodeService, overpassNodeDtoMapper, nationalityService,nationalityDtoMapper)
+        return GetMiniPoi(overpassNodeService, overpassNodeDtoMapper)
     }
 
 }

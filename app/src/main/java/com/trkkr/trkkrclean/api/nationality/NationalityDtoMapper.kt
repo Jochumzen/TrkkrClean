@@ -1,6 +1,7 @@
 package com.example.play71.network
 
 import com.trkkr.trkkrclean.domain.DomainMapper
+import com.trkkr.trkkrclean.domain.Nationality
 
 class NationalityDtoMapper : DomainMapper<NationalityDto, Nationality> {
     override fun mapToDomainModel(model: NationalityDto): Nationality {

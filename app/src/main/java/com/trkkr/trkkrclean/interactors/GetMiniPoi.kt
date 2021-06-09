@@ -19,8 +19,6 @@ import kotlinx.coroutines.flow.flow
 class GetMiniPoi(
     private val overpassNodeService: OverpassNodeService,
     private val overpassNodeDtoMapper : OverpassNodeDtoMapper,
-    private val nationalityService : NationalityService,
-    private val nationalityDtoMapper: NationalityDtoMapper,
     //private val overpassWayDtoMapper : OverpassWayDtoMapper
 ) {
 
@@ -30,28 +28,41 @@ class GetMiniPoi(
     ) : Flow<DataState<MapViewState>?> = flow {
 
         val osmType = (stateEvent as MapStateEvent.GetMiniPoiEvent).feature.getOSMType()
-        val osmId = (stateEvent as MapStateEvent.GetMiniPoiEvent).feature.getOSMId()
+        val osmId = stateEvent.feature.getOSMId()
+
 
         if(osmType == OsmType.NODE)
         {
             val networkResult = safeApiCall(Dispatchers.IO) {
-                val overpassCallString = "data=[out:json];(node($osmId););out meta;"
-                overpassNodeDtoMapper.mapToDomainModel(overpassNodeService.getNode())
+                val overpassCallString = "[out:json];(node($osmId););out meta;"
+                overpassNodeDtoMapper.mapToDomainModel(overpassNodeService.getNode(overpassCallString))
             }
-
-            println("MyDebug: result: $networkResult")
 
             if(networkResult is ApiResult.Success) {
 
-                val viewState = MapViewState(shit = "abc")
+                println("MyDebug: result: ${networkResult.value}")
 
-                val dataState = DataState.data<MapViewState>(
+                if(networkResult.value?.isNotEmpty() == true) {
+
+                    val viewState = MapViewState(osmNode = networkResult.value[0])
+
+                    val dataState = DataState.data<MapViewState>(
+                        Response(
+                            message = "Getting osm object from network success",
+                            uiComponentType = UIComponentType.Toast(),
+                            messageType = MessageType.Success()
+                        ), data = viewState, stateEvent)
+                    emit(dataState)
+                }
+
+                val dataState = DataState.error<MapViewState>(
                     Response(
-                        message = "Getting osm object from network success",
+                        message = "Getting osm object from network failed",
                         uiComponentType = UIComponentType.Toast(),
-                        messageType = MessageType.Success()
-                    ), data = viewState, stateEvent)
+                        messageType = MessageType.Error()
+                    ), stateEvent)
                 emit(dataState)
+
 
             } else {
                 val dataState = DataState.error<MapViewState>(
@@ -63,6 +74,8 @@ class GetMiniPoi(
                 emit(dataState)
             }
         }
+
+
 
     }
 
