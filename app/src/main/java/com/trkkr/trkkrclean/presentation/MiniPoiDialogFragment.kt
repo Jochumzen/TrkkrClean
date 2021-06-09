@@ -36,7 +36,7 @@ class MiniPoiDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = MiniPoiModalBottomSheetBinding.inflate(inflater, container, false).apply {
+        /*_binding = MiniPoiModalBottomSheetBinding.inflate(inflater, container, false).apply {
 
             mapViewModel.miniPoi.observe(viewLifecycleOwner, {
 
@@ -49,7 +49,7 @@ class MiniPoiDialogFragment : BottomSheetDialogFragment() {
             miniPoiImage.setOnClickListener {
                 Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
 
         Log.d("MyDebug", "running onCreateView in: $MiniPoiDialogFragment")
 
