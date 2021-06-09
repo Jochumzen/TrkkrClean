@@ -86,56 +86,6 @@ class MapFragment : Fragment(R.layout.fragment_map) {
                     MapStyleDialogFragment.TAG
                 )
             }
-
-            // https://medium.com/over-engineering/hands-on-with-material-components-for-android-bottom-sheet-970c5f0f1840
-
-            val modalBottomSheet = MiniPoiDialogFragment()
-            modalBottomSheet.show(childFragmentManager, MiniPoiDialogFragment.TAG)
-
-            /*val modalBottomSheetBehavior = (modalBottomSheet.dialog as BottomSheetDialog).behavior
-            modalBottomSheetBehavior.isDraggable = true
-            modalBottomSheetBehavior.isHideable = true*/
-            // modalBottomSheetBehavior.peekHeight // Set how high the modal sheet can be when it's just "mini poi"
-
-            showMiniPoi.setOnClickListener {
-                modalBottomSheet.also {
-                    it.show(childFragmentManager, MiniPoiDialogFragment.TAG)
-                    var miniPoi = MiniPoi(id = 1481338431, name = "Lunds Domkyrka", category = "Place of Worship", distance = "10m", open = true, images = listOf("https://www.google.com/url?sa=i&url=https%3A%2F%2Fsv.wikipedia.org%2Fwiki%2FLunds_domkyrka&psig=AOvVaw2KX0I4nmcJf-IaBNOJqVPz&ust=1623146586125000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPCwvoiihfECFQAAAAAdAAAAABAD"))
-                    mapViewModel.updateMiniPoi(miniPoi)
-                }
-            }
-
-            /*val miniPoiSheetView : ConstraintLayout = miniPoiSheet.miniPoiSheet
-            bottomSheetBehavior = BottomSheetBehavior.from(miniPoiSheetView)
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-            bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    // Handle onslide
-                }
-
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-                        BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(context, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
-                        BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(context, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
-                        BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(context, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
-                        BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(context, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-                        BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(context, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
-                        else -> Toast.makeText(context, "OTHER_STATE", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
-
-            showMiniPoi.setOnClickListener {
-                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                else
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-
-            miniPoiSheet.miniPoiImage.setOnClickListener {
-                Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show()
-            }*/
         }
 
         Log.d("MyDebug", "vm: $mapViewModel")
