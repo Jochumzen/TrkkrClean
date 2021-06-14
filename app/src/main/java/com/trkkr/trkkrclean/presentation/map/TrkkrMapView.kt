@@ -1,22 +1,15 @@
-package com.trkkr.trkkrclean.utilities
+package com.trkkr.trkkrclean.presentation.map
 
-import android.location.Location
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
-import com.mapbox.mapboxsdk.maps.MapView
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.maps.*
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-class TrkkrMap @Inject constructor(
-    private val mapper: Mapper
-) : LifecycleObserver {
+class TrkkrMapView @Inject constructor() : LifecycleObserver {
 
     private var weakMapView: WeakReference<MapView?>? = null
 
@@ -28,26 +21,13 @@ class TrkkrMap @Inject constructor(
 
         mapView?.getMapAsync { mapboxMap ->
 
-            Log.d("MyDebug", "mbm in setup: $mapboxMap")
+            Log.d("MyDebug", "TrkkrMap(setup). We have a MapboxMap: $mapboxMap")
 
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
-                Log.d("MyDebug", "style in setup: $it")
+                Log.d("MyDebug", "TrkkrMap(setup). MapboxMap complete. Style: $it")
                 callback(mapboxMap)
             }
         }
-    }
-
-    fun flyToLocation(location: Location, mapboxMap: MapboxMap?) {
-        val position = CameraPosition.Builder()
-            .target(mapper.mapToLatLng(location))
-            .zoom(15.0)
-            .tilt(20.0)
-            .build()
-
-        mapboxMap?.animateCamera(
-            CameraUpdateFactory.newCameraPosition(position),
-            1000
-        )
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)

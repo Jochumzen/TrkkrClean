@@ -1,13 +1,14 @@
-package com.trkkr.trkkrclean.presentation
+package com.trkkr.trkkrclean.presentation.map
 
 import com.mapbox.geojson.Feature
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.trkkr.trkkrclean.architecture.StateEvent
 
 sealed class MapStateEvent: StateEvent {
-    class GetMiniPoiEvent(
+    class GetPoiEvent(
         val latLng: LatLng,
-        val feature: Feature
+        val feature: Feature,
+        val userLocation: LatLng?
     ): MapStateEvent() {
 
         override fun errorInfo(): String {

@@ -5,8 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface OverpassWayService {
-    @GET("/api/")
+
+    @GET("/api/interpreter")
     suspend fun getWay(
-        @Query("interpreter") data: String
+        @Query("data") data: String
     ): OverpassWayDto
 }

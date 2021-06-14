@@ -1,4 +1,4 @@
-package com.trkkr.trkkrclean.presentation
+package com.trkkr.trkkrclean.presentation.map
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -18,7 +18,6 @@ import androidx.fragment.app.activityViewModels
 import com.mapbox.mapboxsdk.maps.Style.*
 import com.trkkr.trkkrclean.R
 import com.trkkr.trkkrclean.databinding.DialogMapStylesBinding
-import com.trkkr.trkkrclean.presentation.MapViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

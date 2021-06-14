@@ -1,22 +1,14 @@
-package com.trkkr.trkkrclean.presentation
+package com.trkkr.trkkrclean.presentation.map
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.trkkr.trkkrclean.R
 import com.trkkr.trkkrclean.databinding.MiniPoiModalBottomSheetBinding
-import java.net.URL
-import java.net.URLEncoder
 
 class MiniPoiDialogFragment : BottomSheetDialogFragment() {
 

@@ -1,21 +1,20 @@
-package com.trkkr.trkkrclean.presentation
+package com.trkkr.trkkrclean.presentation.map
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mapbox.geojson.Feature
 import com.trkkr.trkkrclean.architecture.DataState
 import com.trkkr.trkkrclean.architecture.StateEvent
-import com.trkkr.trkkrclean.domain.MiniPoi
-import com.trkkr.trkkrclean.interactors.GetMiniPoi
+import com.trkkr.trkkrclean.domain.Poi
+import com.trkkr.trkkrclean.interactors.GetPoi
+import com.trkkr.trkkrclean.presentation.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    private val getMiniPoi: GetMiniPoi
+    private val getPoi: GetPoi
 ) : BaseViewModel<MapViewState>() {
 
     //Keeps track of MapBox Style, see https://docs.mapbox.com/android/maps/guides/styling-map/
@@ -26,11 +25,11 @@ class MapViewModel @Inject constructor(
         _mapBoxStyle.value = style
     }
 
-    private val _miniPoi = MutableLiveData<MiniPoi>()
-    val miniPoi: LiveData<MiniPoi> = _miniPoi
+    private val _miniPoi = MutableLiveData<Poi>()
+    val poi: LiveData<Poi> = _miniPoi
 
-    fun updateMiniPoi(miniPoi: MiniPoi) {
-        _miniPoi.value = miniPoi
+    fun updateMiniPoi(poi: Poi) {
+        _miniPoi.value = poi
     }
 
     //Whether or not the Mapbox LocationComponent is enabled or not
@@ -45,12 +44,10 @@ class MapViewModel @Inject constructor(
     }
 
     override fun setStateEvent(stateEvent: StateEvent) {
-
         val job: Flow<DataState<MapViewState>?> = when(stateEvent) {
 
-
-            is MapStateEvent.GetMiniPoiEvent -> {
-                getMiniPoi.execute(stateEvent)
+            is MapStateEvent.GetPoiEvent -> {
+                getPoi.execute(stateEvent)
             }
 
             else -> {
@@ -61,7 +58,7 @@ class MapViewModel @Inject constructor(
     }
 
     override fun handleNewData(data: MapViewState) {
-        Log.d("MyDebug", "vm: $data")
+        Log.d("MyDebug", "MapViewModel(handleNewData)")
     }
 
 }

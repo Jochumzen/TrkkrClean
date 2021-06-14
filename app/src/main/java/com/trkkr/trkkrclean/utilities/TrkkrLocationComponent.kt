@@ -21,6 +21,7 @@ class TrkkrLocationComponent @Inject constructor(
 
     private var locationComponentEnabled: ((Boolean) -> Unit)? = null
 
+
     fun enableLocationComponent(
         context: Context,
         mapboxMap: MapboxMap?,
@@ -38,7 +39,7 @@ class TrkkrLocationComponent @Inject constructor(
                 )
                 locationComponentEnabled?.invoke(true)
             } else {
-                Log.d("MyDebug", "No permission.")
+                Log.d("MyDebug", "TrkkrLocationComponent(enableLocationComponent). No permission.")
                 requestPermission(mapboxMap)
             }
         }
@@ -51,7 +52,7 @@ class TrkkrLocationComponent @Inject constructor(
         val permissionError = context?.getString(R.string.gps_toast_message)
         Log.d("MyDebug", "TLC: Requesting perms.")
         permissionsUtil.request(context as Activity) { granted ->
-            Log.d("MyDebug", "TLC callback. granted: $granted")
+            Log.d("MyDebug", "TrkkrLocationComponent(requestPermission). TLC callback. granted: $granted")
 
             if (granted) {
                 onLocationPermissionGranted(
@@ -86,7 +87,7 @@ class TrkkrLocationComponent @Inject constructor(
 
             locationComponent.renderMode = RenderMode.COMPASS
 
-            Log.d("MyDebug", "Location component is enabled.")
+            Log.d("MyDebug", "TrkkrLocationComponent(onLocationPermissionGranted). Location component is enabled.")
         }
     }
 

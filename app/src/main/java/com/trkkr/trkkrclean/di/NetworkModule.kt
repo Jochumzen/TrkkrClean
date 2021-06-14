@@ -1,12 +1,12 @@
 package com.trkkr.trkkrclean.di
 
-import com.example.play71.network.NationalityDtoMapper
-import com.example.play71.network.NationalityService
 import com.trkkr.trkkrclean.api.ors.directions.DirectionsService
 import com.trkkr.trkkrclean.api.ors.reverseSearch.ReverseSearchService
 import com.trkkr.trkkrclean.api.ors.search.SearchService
 import com.trkkr.trkkrclean.api.overpass.node.OverpassNodeDtoMapper
 import com.trkkr.trkkrclean.api.overpass.node.OverpassNodeService
+import com.trkkr.trkkrclean.api.overpass.way.OverpassWayDtoMapper
+import com.trkkr.trkkrclean.api.overpass.way.OverpassWayService
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesService
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesDataSource
 import com.trkkr.trkkrclean.api.trkkr.osmtype.OSMTypesNetworkDataSource
@@ -18,6 +18,7 @@ import com.trkkr.trkkrclean.di.URLs.REVERSE_SEARCH_URL
 import com.trkkr.trkkrclean.di.URLs.SEARCH_URL
 import com.trkkr.trkkrclean.di.URLs.WIKIDATA_URL
 import com.trkkr.trkkrclean.di.URLs.WIKIPEDIA_URL
+import com.trkkr.trkkrclean.utilities.Mapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +30,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    @Singleton
+    @Provides
+    fun provideMapper() : Mapper {
+        return Mapper()
+    }
+
+    @Singleton
     @Provides
     fun provideOSMTypesDataSource(): OSMTypesDataSource =
         OSMTypesNetworkDataSource(
@@ -84,6 +93,22 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(OverpassNodeService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideOverpassWayDtoMapper() : OverpassWayDtoMapper {
+        return OverpassWayDtoMapper()
+    }
+
+    @Singleton
+    @Provides
+    fun provideOverpassWayService(): OverpassWayService {
+        return Retrofit.Builder()
+            .baseUrl(OVERPASS_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(OverpassWayService::class.java)
     }
 
     @Singleton

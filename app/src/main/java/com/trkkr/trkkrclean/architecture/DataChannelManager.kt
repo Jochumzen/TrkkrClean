@@ -23,9 +23,9 @@ abstract class DataChannelManager<ViewState> {
         jobFunction: Flow<DataState<ViewState>?>
     ) {
 
-        println("MyDebug: Inside launchJob of the DataChannelManager")
+        //println("MyDebug: Inside launchJob of the DataChannelManager")
         if(canExecuteNewStateEvent(stateEvent)) {
-            println("MyDebug: StateEvent can be executed")
+            //println("MyDebug: StateEvent can be executed")
             addStateEvent(stateEvent)
             jobFunction
                 .onEach { dataState ->

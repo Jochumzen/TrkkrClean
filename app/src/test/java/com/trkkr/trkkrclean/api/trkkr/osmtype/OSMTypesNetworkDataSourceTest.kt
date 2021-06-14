@@ -33,6 +33,7 @@ class OSMTypesNetworkDataSourceTest {
 
     @Test
     fun `should fetch types correctly given 200 response`() {
+
         mockWebServer.enqueueResponse("osmtypes.json", 200)
 
         runBlocking {

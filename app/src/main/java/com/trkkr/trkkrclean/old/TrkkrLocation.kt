@@ -12,7 +12,7 @@ import com.mapbox.android.core.location.LocationEngineResult
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.trkkr.trkkrclean.utilities.PermissionsUtil
-import com.trkkr.trkkrclean.presentation.MapViewModel
+import com.trkkr.trkkrclean.presentation.map.MapViewModel
 import dagger.hilt.android.scopes.ActivityScoped
 import java.lang.Exception
 import java.lang.ref.WeakReference

@@ -15,22 +15,19 @@ import dagger.hilt.android.components.ActivityComponent
 @InstallIn(ActivityComponent::class)
 object MyActivityModule {
 
-    @Provides
-    fun provideMapper() : Mapper {
-        return Mapper()
-    }
+
 
     @Provides
     fun providesToaster(application: Application): Toaster {
         return Toaster(application)
     }
-
+    /*
     @Provides
     fun provideLocationEngine(application: Application): LocationEngine {
         return LocationEngineProvider.getBestLocationEngine(application)
     }
 
-    /*
+
     @Provides
     fun providePermissionsUtil() : PermissionsUtil {
         return PermissionsUtil()
